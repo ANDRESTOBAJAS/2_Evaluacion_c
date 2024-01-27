@@ -13,7 +13,7 @@ int main(void) {
   int col_as;
   int n_asteriscos;
   char numeros[NFILA][NCOLU];
-  char palabra[]="ANDRES";
+  char palabra[]="ANDRÉS";
   int seed;//Semilla para inicializar el generador de números al azar
   seed=time(0);//Cargamos la semilla con el tiempo transcurrido
   srand(seed);//Inicializamos el generador de números
