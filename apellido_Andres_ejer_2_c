@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <stdbool.h>
+
+int main(){
+    int i, j;
+    char matriz[3][3];
+    
+    // Inicializa la semilla del generador de números aleatorios
+    srand(time(NULL));
+    
+    // Bucle while que se repite hasta que se genera una matriz válida
+    while (true) {
+        bool hayDosAsContiguas = false;
+        
+        // Inicializa la matriz con valores aleatorios
+        for(i = 0; i < 3; i++){
+            for(j = 0; j < 3; j++){
+                matriz[i][j] = 'A' + rand() % 3;
+            }
+        }
+        
+        // Comprueba si hay dos "A"s contiguas en la matriz
+        for(i = 0; i < 2; i++){
+            for(j = 0; j < 3; j++){
+                if (matriz[i][j] == matriz[i+1][j]) {
+                    hayDosAsContiguas = true;
+                    break;
+                }
+            }
+            if (hayDosAsContiguas) {
+                break;
+            }
+        }
+        if (!hayDosAsContiguas) {
+            for(i = 0; i < 3; i++){
+                for(j = 0; j < 2; j++){
+                    if (matriz[i][j] == matriz[i][j+1]) {
+                        hayDosAsContiguas = true;
+                        break;
+                    }
+                }
+                if (hayDosAsContiguas) {
+                    break;
+                }
+            }
+        }
+        // Si no se han encontrado dos "A"s contiguas, sale del bucle while
+        if (!hayDosAsContiguas) {
+            break;
+        }
+    }
+    
+    // Imprime la matriz
+    for(i = 0; i < 3; i++){
+        for(j = 0; j < 3; j++){
+            printf("%c ", matriz[i][j]);
+        }
+        printf("\n");
+    }
+    
+    return 0;
+}
