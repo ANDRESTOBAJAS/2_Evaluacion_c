@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define NPERSONAS 3
+
+int main(void) {
+    char *lista[NPERSONAS];
+    char *pintercambio;
+
+    for (int i = 0; i < NPERSONAS; i++) {
+        char input[50];
+        printf("Ingrese el nombre y la fecha de nacimiento : ", i+1);
+        scanf("%s", input);
+
+        // uso malloc para asignar memoria dinámicamente
+        lista[i] = (char *)malloc(strlen(input) + 1);
+        if (lista[i] == NULL) {
+            printf("Error al asignar memoria.");
+            return 1;
+        }
+        strcpy(lista[i], input);
+    }
+
+    // escribo los nombres y fechas de nacimiento almacenados
+    printf("\nNombres y fechas de nacimiento almacenados:\n");
+    for (int i = 0; i < NPERSONAS; i++) {
+        printf("%s\n", lista[i]);
+    }
+
+    // cambio los nombres de las dos primeras personas
+    pintercambio = lista[0];
+    lista[0] = lista[1];
+    lista[1] = pintercambio;
+
+    // escribo los nombres y fechas de nacimiento después del intercambio
+    printf("\nNombres y fechas de nacimiento después del intercambio:\n");
+    for (int i = 0; i < NPERSONAS; i++) {
+        printf("%s\n", lista[i]);
+        free(lista[i]);  // libero la memoria asignada dinámicamente
+    }
+
+    return 0;
+}
